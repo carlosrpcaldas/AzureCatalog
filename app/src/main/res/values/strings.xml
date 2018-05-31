@@ -10,4 +10,7 @@
     <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="register">ADD</string>
+    <string name="informe_todos_campos">Informe todos os campos</string>
+    <string name="email_em_uso">Email já esta em uso!</string>
+    <string name="erro_inesperado">Algo de errado aconteceu! Tente novamente!</string>
 </resources>
