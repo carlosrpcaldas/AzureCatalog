@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import carloscaldas.fiap.com.br.azurecatalog.contants.DataBaseConstants
 
-class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION ) {
+class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private val DATABASE_VERSION: Int = 1
@@ -37,25 +37,30 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         );"""
 
 
-/*    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
-        VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4, 'Critica')"""
-*/
-    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
+    /*    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
+            VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4, 'Critica')"""
+    */
+/*    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
+*/
+    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
     private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"
     private val deleteTableTask = "drop table if exists ${DataBaseConstants.TASK.TABLE_NAME}"
 
     override fun onCreate(sqlLite: SQLiteDatabase) {
-        sqlLite.execSQL(createTableUser)  //execSQL(createTableUser)
+
+        sqlLite.execSQL(createTableUser)
         sqlLite.execSQL(createTablePriority)
         sqlLite.execSQL(createTableTask)
-        sqlLite.execSQL(insertPriority)
-
+        for (item in insertPriority) {
+            sqlLite.execSQL(item)
+        }
     }
+
 
     override fun onUpgrade(sqlLite: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Remocao
@@ -66,11 +71,11 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         // Criacao
         sqlLite.execSQL(createTableUser)
 
-        when (oldVersion){
+        when (oldVersion) {
             1 -> {
-            // atualizacao da 1 para 2
-            // atualizacao da 2 para 3 - 3 para 4
-            // da 4 ára a 5
+                // atualizacao da 1 para 2
+                // atualizacao da 2 para 3 - 3 para 4
+                // da 4 ára a 5
             }
         }
 
