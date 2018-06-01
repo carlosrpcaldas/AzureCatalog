@@ -37,8 +37,13 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         );"""
 
 
-    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
+/*    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
         VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4, 'Critica')"""
+*/
+    private val insertPriority = ("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');" +
+            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');" +
+            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');" +
+            "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
     private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"
@@ -48,7 +53,7 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         sqlLite.execSQL(createTableUser)  //execSQL(createTableUser)
         sqlLite.execSQL(createTablePriority)
         sqlLite.execSQL(createTableTask)
-        sqlLite.execSQL(insertPriorities)
+        sqlLite.execSQL(insertPriority)
 
     }
 
