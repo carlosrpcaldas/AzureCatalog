@@ -1,5 +1,6 @@
 package carloscaldas.fiap.com.br.azurecatalog.views
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -47,6 +48,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
             // Faz a insercao do usuario
             mUserBusiness.insert(name, email, password)
+
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
 
         } catch (e: ValidationException) {
             Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()

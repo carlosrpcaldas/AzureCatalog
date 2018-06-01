@@ -21,15 +21,42 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         ${DataBaseConstants.USER.COLUMNS.PASSWORD} TEXT
         );"""
 
+    private val createTablePriority = """ CREATE TABLE ${DataBaseConstants.PRIORITY.TABLE_NAME} (
+        ${DataBaseConstants.PRIORITY.COLUMNS.ID} INTEGER PRIMARY KEY,
+        ${DataBaseConstants.PRIORITY.COLUMNS.DESCRIPTION} TEXT
+        );"""
+
+
+    private val createTableTask = """ CREATE TABLE ${DataBaseConstants.TASK.TABLE_NAME} (
+        ${DataBaseConstants.TASK.COLUMNS.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DataBaseConstants.TASK.COLUMNS.USERID} INTEGER,
+        ${DataBaseConstants.TASK.COLUMNS.PRIORITYID} INTEGER,
+        ${DataBaseConstants.TASK.COLUMNS.DESCRIPTION} TEXT,
+        ${DataBaseConstants.TASK.COLUMNS.COMPLETE} INTEGER,
+        ${DataBaseConstants.TASK.COLUMNS.DUEDATE} TEXT
+        );"""
+
+
+    private val insertPriorities = """INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME}
+        VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4, 'Critica')"""
+
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
+    private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"
+    private val deleteTableTask = "drop table if exists ${DataBaseConstants.TASK.TABLE_NAME}"
 
     override fun onCreate(sqlLite: SQLiteDatabase) {
         sqlLite.execSQL(createTableUser)  //execSQL(createTableUser)
+        sqlLite.execSQL(createTablePriority)
+        sqlLite.execSQL(createTableTask)
+        sqlLite.execSQL(insertPriorities)
+
     }
 
     override fun onUpgrade(sqlLite: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // Remocao
         sqlLite.execSQL(deleteTableUser)
+        sqlLite.execSQL(deleteTablePriority)
+        sqlLite.execSQL(deleteTableTask)
 
         // Criacao
         sqlLite.execSQL(createTableUser)
