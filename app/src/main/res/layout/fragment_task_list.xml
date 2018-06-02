@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".views.TaskListFragment">
 
+<!--
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
+-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerTaskList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatAddTask"

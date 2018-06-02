@@ -6,11 +6,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import carloscaldas.fiap.com.br.azurecatalog.R
+import carloscaldas.fiap.com.br.azurecatalog.adapter.TaskListAdapter
+import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
+import carloscaldas.fiap.com.br.azurecatalog.business.TaskBusiness
+import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
+import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +37,9 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
 
     private lateinit var mContext: Context
+    private lateinit var mRecyclerTaskList: RecyclerView
+    private lateinit var mTaskBusiness: TaskBusiness
+    private lateinit var mSecurityPreferences: SecurityPreferences
 
     companion object {
         /**
@@ -53,25 +63,37 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    /*    // TODO: Rename and change types of parameters
-        private var param1: String? = null
-        private var param2: String? = null
-     //   private var listener: OnFragmentInteractionListener? = null
-    */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-/*        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        } */
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         val rootView = inflater!!.inflate(R.layout.fragment_task_list, container, false)
 
         rootView.findViewById<FloatingActionButton>(R.id.floatAddTask).setOnClickListener(this)
         mContext = rootView.context
+
+        mTaskBusiness = TaskBusiness(mContext)
+        mSecurityPreferences = SecurityPreferences(mContext)
+
+        // 1 Obter o elemento
+        mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
+
+        // 2 Definir um layout com os itens de listagem
+        val userId = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
+        val taskList = mTaskBusiness.getList(userId)
+
+        for (i in 0..50){
+            taskList.add(taskList[0].copy(description = "Description $i"))
+        }
+
+        mRecyclerTaskList.adapter = TaskListAdapter(taskList)
+
+
+        // 3 Definir um layout
+        mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
+
+
 
         return rootView
     }
