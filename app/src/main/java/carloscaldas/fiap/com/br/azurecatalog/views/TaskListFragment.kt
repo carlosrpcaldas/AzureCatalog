@@ -1,8 +1,10 @@
 package carloscaldas.fiap.com.br.azurecatalog.views
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +14,8 @@ import carloscaldas.fiap.com.br.azurecatalog.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+// private const val ARG_PARAM1 = "param1"
+// private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -24,12 +26,38 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class TaskListFragment : Fragment() {
-/*    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
- //   private var listener: OnFragmentInteractionListener? = null
+class TaskListFragment : Fragment(), View.OnClickListener {
+
+
+    private lateinit var mContext: Context
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment TaskListFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(): TaskListFragment {
+/*
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
+            }
 */
+            return TaskListFragment()
+        }
+    }
+
+    /*    // TODO: Rename and change types of parameters
+        private var param1: String? = null
+        private var param2: String? = null
+     //   private var listener: OnFragmentInteractionListener? = null
+    */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 /*        arguments?.let {
@@ -40,8 +68,22 @@ class TaskListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_task_list, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_task_list, container, false)
+
+        rootView.findViewById<FloatingActionButton>(R.id.floatAddTask).setOnClickListener(this)
+        mContext = rootView.context
+
+        return rootView
     }
+
+    override fun onClick(view: View) {
+        when (view.id){
+            R.id.floatAddTask -> {
+                startActivity(Intent(mContext, TaskFormActivity::class.java))
+            }
+        }
+     }
+
 
 /*
     // TODO: Rename method, update argument and hook method into UI event
@@ -64,7 +106,7 @@ class TaskListFragment : Fragment() {
     }
 
     */
-/**
+    /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -82,25 +124,4 @@ class TaskListFragment : Fragment() {
     }
 
 */
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(): TaskListFragment {
-/*
-            arguments = Bundle().apply {
-                putString(ARG_PARAM1, param1)
-                putString(ARG_PARAM2, param2)
-            }
-*/
-            return TaskListFragment()
-        }
-    }
 }
