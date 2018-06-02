@@ -19,10 +19,6 @@ import carloscaldas.fiap.com.br.azurecatalog.business.TaskBusiness
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
 import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-// private const val ARG_PARAM1 = "param1"
-// private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -80,22 +76,17 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
-        val userId = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
-        val taskList = mTaskBusiness.getList(userId)
-
-        for (i in 0..50){
-            taskList.add(taskList[0].copy(description = "Description $i"))
-        }
-
-        mRecyclerTaskList.adapter = TaskListAdapter(taskList)
-
+        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
 
         // 3 Definir um layout
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
 
-
-
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadTasks()
     }
 
     override fun onClick(view: View) {
@@ -106,44 +97,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         }
      }
 
-
-/*
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    private fun loadTasks(){
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList())
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
-
-    */
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     *//*
-
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-*/
 }
