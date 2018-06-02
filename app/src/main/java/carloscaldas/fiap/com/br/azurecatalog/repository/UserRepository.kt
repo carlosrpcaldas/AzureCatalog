@@ -88,6 +88,8 @@ class UserRepository private constructor(context: Context) {
         }
 
         return ret
+        // Para mais um commit
+        
     }
     fun insert(name: String, email: String, password: String) : Int{
         // select, update, inserte, delete
