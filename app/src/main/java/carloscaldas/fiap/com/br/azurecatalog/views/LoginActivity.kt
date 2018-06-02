@@ -39,8 +39,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun verifyLoggedUser(){
 
-        val userID = mSecurityPreferences.getStoredString(TaskConstants.Key.USER_ID)
-        val name = mSecurityPreferences.getStoredString(TaskConstants.Key.USER_NAME)
+        val userID = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID)
+        val name = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)
 
         if (userID != "" && name != ""){
             startActivity(Intent(this, MainActivity::class.java))

@@ -1,10 +1,8 @@
 package carloscaldas.fiap.com.br.azurecatalog.views
 
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
@@ -94,9 +92,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun handleLogout() {
 
         // Apagar os dados do usuario
-        mSecurityPreferences.removeStoredString(TaskConstants.Key.USER_ID)
-        mSecurityPreferences.removeStoredString(TaskConstants.Key.USER_EMAIL)
-        mSecurityPreferences.removeStoredString(TaskConstants.Key.USER_NAME)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_ID)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_EMAIL)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_NAME)
 
         startActivity(Intent(this, LoginActivity::class.java))
         finish()

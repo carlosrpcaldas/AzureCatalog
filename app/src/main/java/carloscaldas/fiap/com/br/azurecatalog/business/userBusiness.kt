@@ -18,9 +18,9 @@ class UserBusiness (val context: Context){
         val user: UserEntity? = mUserRepository.get(email, password)
         return if (user != null){
 
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_ID, user.id.toString())
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_EMAIL, user.name)
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_NAME, user.email)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_ID, user.id.toString())
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, user.name)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, user.email)
 
             true
         }else {
@@ -42,9 +42,9 @@ class UserBusiness (val context: Context){
             val userID = mUserRepository.insert(name, email, password)
 
             // Salvar dados do usuario no shared
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_ID, userID.toString())
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_EMAIL, name)
-            mSecurityPreferences.storeString(TaskConstants.Key.USER_NAME, email)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_ID, userID.toString())
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, name)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, email)
 
 
         } catch (e: Exception) {

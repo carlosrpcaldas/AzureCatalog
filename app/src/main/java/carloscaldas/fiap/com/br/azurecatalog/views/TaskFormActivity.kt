@@ -10,9 +10,9 @@ import android.widget.Toast
 import carloscaldas.fiap.com.br.azurecatalog.R
 import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
 import carloscaldas.fiap.com.br.azurecatalog.business.TaskBusiness
-import carloscaldas.fiap.com.br.azurecatalog.business.UserBusiness
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
 import carloscaldas.fiap.com.br.azurecatalog.entities.PriorityEntity
+import carloscaldas.fiap.com.br.azurecatalog.entities.TaskEntity
 import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_task_form.*
 import java.text.SimpleDateFormat
@@ -73,7 +73,10 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val complete = checkComplete.isChecked
             val dueDate = buttonDate.text.toString()
             val description = editDescription.text.toString()
-            val userID =  mSecurityPreferences.getStoredString(TaskConstants.Key.USER_ID)
+            val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
+
+            val taskEntity = TaskEntity(0, userID, priorityId, description, dueDate, complete )
+            mTaskBusiness.insert(taskEntity)
 
         }catch (e: Exception){
             Toast.makeText(this, getString(R.string.erro_inesperado), Toast.LENGTH_LONG)
