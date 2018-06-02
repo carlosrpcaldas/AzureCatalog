@@ -8,7 +8,7 @@ import carloscaldas.fiap.com.br.azurecatalog.entities.TaskEntity
 import carloscaldas.fiap.com.br.azurecatalog.viewholder.TaskViewHolder
 
 class TaskListAdapter (val taskList: List<TaskEntity>) : RecyclerView.Adapter <TaskViewHolder>() {
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val context = parent?.context
         val inflater = LayoutInflater.from(context)
