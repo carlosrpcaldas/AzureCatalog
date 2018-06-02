@@ -36,31 +36,26 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     private lateinit var mRecyclerTaskList: RecyclerView
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private var mTaskFilter: Int = 0
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TaskListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(): TaskListFragment {
-/*
-            arguments = Bundle().apply {
-                putString(ARG_PARAM1, param1)
-                putString(ARG_PARAM2, param2)
-            }
-*/
-            return TaskListFragment()
+
+        fun newInstance(taskFilter: Int): TaskListFragment {
+            val args: Bundle = Bundle()
+            args.putInt(TaskConstants.TASKFILTER.KEY, taskFilter)
+
+            val fragment = TaskListFragment()
+            fragment.arguments = args
+
+            return fragment
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            mTaskFilter = arguments!!.getInt(TaskConstants.TASKFILTER.KEY)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -76,6 +71,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
+        val bosta = TaskListAdapter(mutableListOf())
         mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
 
         // 3 Definir um layout
@@ -98,6 +94,6 @@ class TaskListFragment : Fragment(), View.OnClickListener {
      }
 
     private fun loadTasks(){
-        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList())
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter))
     }
 }
