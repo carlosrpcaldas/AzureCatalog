@@ -88,6 +88,15 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 loadTasks()
                 Toast.makeText(mContext, getString(R.string.tarefa_removida_sucesso), Toast.LENGTH_LONG).show()
             }
+            override fun onUncompleteClick(taskID: Int) {
+                mTaskBusiness.complete(taskID, false)
+                loadTasks()
+            }
+
+            override fun onCompleteClick(taskID: Int) {
+                mTaskBusiness.complete(taskID, true)
+                loadTasks()
+            }
 
         }
 

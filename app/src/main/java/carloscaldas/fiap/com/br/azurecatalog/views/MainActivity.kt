@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.widget.TextView
 import carloscaldas.fiap.com.br.azurecatalog.R
 import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
@@ -17,6 +18,7 @@ import carloscaldas.fiap.com.br.azurecatalog.repository.PriorityCacheConstants
 import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -44,9 +47,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mPriorityBusiness = PriorityBusiness(this)
 
         loadPriorityCache()
-
         startDefaultFragment()
-
+        formatUserName()
+        formateDate()
     }
 
     override fun onStart(){
@@ -86,7 +89,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_done -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.COMPLETE)
             R.id.nav_todo -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.TODO)
-            R.id.nav_logout -> handleLogout()
+            R.id.nav_logout -> {
+                handleLogout()
+                return false
+            }
         }
 
         val fragmentManager = supportFragmentManager
@@ -110,10 +116,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Apagar os dados do usuario
         mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_ID)
-        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_EMAIL)
         mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_NAME)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_EMAIL)
 
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun formateDate(){
+        val c = Calendar.getInstance()
+
+        val days = arrayOf("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sabado")
+        val months = arrayOf("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
+
+        val str = "${days[c.get(Calendar.DAY_OF_WEEK) - 1]}, ${c.get(Calendar.DAY_OF_MONTH)} de ${months[c.get(Calendar.MONTH)]}"
+        textDateDescription.text = str
+    }
+
+    private fun formatUserName(){
+        val str = "Ola, ${mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)}!"
+        textHello.text = str
+
+        val navigationView = findViewById(R.id.nav_view) as NavigationView
+        val header = navigationView.getHeaderView(0)
+
+        val name = header.findViewById<TextView>(R.id.textName)
+        val email = header.findViewById<TextView>(R.id.textEmail)
+        name.text = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)
+        email.text = mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_EMAIL)
     }
 }

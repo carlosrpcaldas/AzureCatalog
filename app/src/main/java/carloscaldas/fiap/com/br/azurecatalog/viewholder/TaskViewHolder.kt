@@ -12,7 +12,7 @@ import carloscaldas.fiap.com.br.azurecatalog.entities.OnTaskListFragmentInteract
 import carloscaldas.fiap.com.br.azurecatalog.entities.TaskEntity
 import carloscaldas.fiap.com.br.azurecatalog.repository.PriorityCacheConstants
 
-class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskListFragmentInteractionListener) : RecyclerView.ViewHolder(itemView){
+class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskListFragmentInteractionListener) : RecyclerView.ViewHolder(itemView) {
 
     private val mTextDescription: TextView = itemView.findViewById(R.id.textDescription)
     private val mTextPriority: TextView = itemView.findViewById(R.id.textPriority)
@@ -20,12 +20,12 @@ class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskL
     private val mImageTask: ImageView = itemView.findViewById(R.id.imageTask)
 
 
-    fun bindData(task: TaskEntity){
+    fun bindData(task: TaskEntity) {
         mTextDescription.text = task.description
         mTextPriority.text = PriorityCacheConstants.getPriorityDescription(task.priorityID)
         mTextDate.text = task.dueDate
 
-        if (task.complete){
+        if (task.complete) {
             mImageTask.setImageResource(R.drawable.ic_done)
         }
 
@@ -40,24 +40,33 @@ class TaskViewHolder(itemView: View, val context: Context, val listener: OnTaskL
             true
         })
 
+        mImageTask.setOnClickListener {
+            (
+                    if (task.complete) {
+                        listener.onUncompleteClick(task.id)
+                    } else {
+                        listener.onCompleteClick(task.id)
+                    }
+                    )
+        }
     }
-    private fun showConfirmationDialog(task: TaskEntity){
-        //listener.onDeleteClick(taskId)
+        private fun showConfirmationDialog(task: TaskEntity) {
+            //listener.onDeleteClick(taskId)
 
-        AlertDialog.Builder(context)
-                .setTitle("Remocao de tarefa")
-                .setMessage("Deseja remover ${task.description}?")
-                .setIcon(R.drawable.ic_delete)
-                // Lambda   .setPositiveButton("Remover", {dialogInterface, i ->listener.onDeleteClick(task.id) })
-                /* Human readable format */ .setPositiveButton("Remover", handleRemoval(listener, task.id))
-                .setNegativeButton("Cancelar", null).show()
+            AlertDialog.Builder(context)
+                    .setTitle("Remocao de tarefa")
+                    .setMessage("Deseja remover ${task.description}?")
+                    .setIcon(R.drawable.ic_delete)
+                    // Lambda   .setPositiveButton("Remover", {dialogInterface, i ->listener.onDeleteClick(task.id) })
+                    /* Human readable format */.setPositiveButton("Remover", handleRemoval(listener, task.id))
+                    .setNegativeButton("Cancelar", null).show()
 
-    }
-
-    private class handleRemoval(val listener: OnTaskListFragmentInteractionListener, val taskId: Int) : DialogInterface.OnClickListener{
-        override fun onClick(dialog: DialogInterface?, which: Int) {
-            listener.onDeleteClick(taskId)
         }
 
+        private class handleRemoval(val listener: OnTaskListFragmentInteractionListener, val taskId: Int) : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                listener.onDeleteClick(taskId)
+            }
+
+        }
     }
-}

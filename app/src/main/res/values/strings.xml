@@ -24,4 +24,6 @@
     <string name="tarefa_incluida">Tarefa incluida com sucesso</string>
     <string name="tarefa_alterada">Tarefa alterada com sucesso</string>
     <string name="tarefa_removida_sucesso">Tarefa removida com sucesso</string>
+    <string name="adicionar_tarefa">Adicionar tarefa</string>
+    <string name="atualizar_tarefa">Update Task</string>
 </resources>

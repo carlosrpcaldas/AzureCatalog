@@ -19,8 +19,8 @@ class UserBusiness (val context: Context){
         return if (user != null){
 
             mSecurityPreferences.storeString(TaskConstants.KEY.USER_ID, user.id.toString())
-            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, user.name)
-            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, user.email)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, user.email)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, user.name)
 
             true
         }else {
@@ -43,8 +43,8 @@ class UserBusiness (val context: Context){
 
             // Salvar dados do usuario no shared
             mSecurityPreferences.storeString(TaskConstants.KEY.USER_ID, userID.toString())
-            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, name)
-            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, email)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_NAME, name)
+            mSecurityPreferences.storeString(TaskConstants.KEY.USER_EMAIL, email)
 
 
         } catch (e: Exception) {
