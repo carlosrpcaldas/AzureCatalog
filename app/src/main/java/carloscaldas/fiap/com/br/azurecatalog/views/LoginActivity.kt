@@ -34,6 +34,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             R.id.buttonLogin -> {
                 handleLogin()
             }
+            R.id.textDontHave ->{
+                startActivity(Intent(this, RegisterActivity::class.java))
+            }
         }
     }
 
@@ -65,5 +68,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setListeners(){
         buttonLogin.setOnClickListener(this)
+        textDontHave.setOnClickListener(this)
     }
 }
