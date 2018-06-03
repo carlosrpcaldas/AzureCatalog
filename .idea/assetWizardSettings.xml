@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="$USER_HOME$/Documents/TrabalhoAndroid/azure.png" />
-                                      <entry key="outputName" value="ic_exit" />
+                                      <entry key="outputName" value="img_azure" />
                                     </map>
                                   </option>
                                 </PersistentState>
