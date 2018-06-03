@@ -21,4 +21,7 @@
     <string name="done">Done</string>
     <string name="todo">Pending</string>
     <string name="Sair">Logout</string>
+    <string name="tarefa_incluida">Tarefa incluida com sucesso</string>
+    <string name="tarefa_alterada">Tarefa alterada com sucesso</string>
+    <string name="tarefa_removida_sucesso">Tarefa removida com sucesso</string>
 </resources>

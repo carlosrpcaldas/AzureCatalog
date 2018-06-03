@@ -38,7 +38,7 @@ class UserRepository private constructor(context: Context) {
                     DataBaseConstants.USER.COLUMNS.EMAIL,
                     DataBaseConstants.USER.COLUMNS.PASSWORD)
 
-            val selection = "${DataBaseConstants.USER.COLUMNS.EMAIL} = ? AND ${DataBaseConstants.USER.COLUMNS.EMAIL} = ?"
+            val selection = "${DataBaseConstants.USER.COLUMNS.EMAIL} = ? AND ${DataBaseConstants.USER.COLUMNS.PASSWORD} = ?"
             val selectionArgs = arrayOf(email, password)
 
             cursor = db.query(DataBaseConstants.USER.TABLE_NAME, projection, selection, selectionArgs, null, null, null)
@@ -89,7 +89,7 @@ class UserRepository private constructor(context: Context) {
 
         return ret
         // Para mais um commit
-        
+
     }
     fun insert(name: String, email: String, password: String) : Int{
         // select, update, inserte, delete

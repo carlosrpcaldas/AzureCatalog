@@ -11,12 +11,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import carloscaldas.fiap.com.br.azurecatalog.R
 import carloscaldas.fiap.com.br.azurecatalog.adapter.TaskListAdapter
 import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
 import carloscaldas.fiap.com.br.azurecatalog.business.TaskBusiness
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
+import carloscaldas.fiap.com.br.azurecatalog.entities.OnTaskListFragmentInteractionListener
 import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 
 
@@ -36,6 +38,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     private lateinit var mRecyclerTaskList: RecyclerView
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private lateinit var mListerner: OnTaskListFragmentInteractionListener
     private var mTaskFilter: Int = 0
 
     companion object {
@@ -62,17 +65,37 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         val rootView = inflater!!.inflate(R.layout.fragment_task_list, container, false)
 
         rootView.findViewById<FloatingActionButton>(R.id.floatAddTask).setOnClickListener(this)
+
+        // Nao estava aqui antes!!!
         mContext = rootView.context
 
+        //Inicializa variaveis
         mTaskBusiness = TaskBusiness(mContext)
         mSecurityPreferences = SecurityPreferences(mContext)
+        mListerner = object : OnTaskListFragmentInteractionListener {
+
+            override fun onListClick(taskId: Int) {
+                val bundle: Bundle = Bundle()
+                bundle.putInt(TaskConstants.BUNDLE.TASKID, taskId)
+
+                val intent = Intent(mContext, TaskFormActivity::class.java)
+                intent.putExtras(bundle)
+
+                startActivity(intent)
+            }
+            override fun onDeleteClick(taskId: Int) {
+                mTaskBusiness.delete(taskId)
+                loadTasks()
+                Toast.makeText(mContext, getString(R.string.tarefa_removida_sucesso), Toast.LENGTH_LONG).show()
+            }
+
+        }
 
         // 1 Obter o elemento
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
-        val bosta = TaskListAdapter(mutableListOf())
-        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf())
+        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf(), mListerner)
 
         // 3 Definir um layout
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
@@ -94,6 +117,6 @@ class TaskListFragment : Fragment(), View.OnClickListener {
      }
 
     private fun loadTasks(){
-        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter))
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter), mListerner)
     }
 }
