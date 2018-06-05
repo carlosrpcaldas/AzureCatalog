@@ -1,5 +1,6 @@
 package carloscaldas.fiap.com.br.azurecatalog.views
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -15,15 +16,21 @@ import carloscaldas.fiap.com.br.azurecatalog.R
 import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
 import carloscaldas.fiap.com.br.azurecatalog.repository.PriorityCacheConstants
+import carloscaldas.fiap.com.br.azurecatalog.util.CallMyHttp
 import carloscaldas.fiap.com.br.azurecatalog.util.SecurityPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import okhttp3.*
+import java.io.IOException
 import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+
+
     private lateinit var mSecurityPreferences: SecurityPreferences
     private lateinit var mPriorityBusiness: PriorityBusiness
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +57,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         startDefaultFragment()
         formatUserName()
         formateDate()
+
+
+
+
+        var mCallMyHttp = CallMyHttp()  //("https://api.github.com/users/Evin1-/repos")
+        mCallMyHttp.executeReq("https://api.github.com/users/Evin1-/repos")
+//        mCallMyHttp.executeReq("http://viacep.com.br")
+
     }
+
+
+
+
+
+
 
     override fun onStart(){
         super.onStart()
