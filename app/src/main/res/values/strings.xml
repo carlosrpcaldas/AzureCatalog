@@ -26,6 +26,8 @@
     <string name="tarefa_removida_sucesso">Tarefa removida com sucesso</string>
     <string name="adicionar_tarefa">Adicionar tarefa</string>
     <string name="atualizar_tarefa">Update Task</string>
+    
+    <string name="API_KEY">AIzaSyDRRe1IphONolYrGysbBUmoJ7SOcnVITUI</string>
 
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
