@@ -1,6 +1,7 @@
 package carloscaldas.fiap.com.br.azurecatalog.views
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,7 +19,10 @@ import kotlinx.android.synthetic.main.activity_task_form.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
+
+class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener
+
+{
 
     private lateinit var mPriorityBusiness: PriorityBusiness
     private lateinit var mTaskBusiness: TaskBusiness
@@ -51,6 +55,9 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             R.id.buttonSave -> {
                 handleSave()
             }
+            R.id.buttonMap -> {
+                showMap()
+            }
         }
     }
 
@@ -61,9 +68,19 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         buttonDate.text = mSimpleDateFormat.format(calendar.time)
     }
 
+    private fun showMap(){
+        val mapFragment = MapFragment()
+        //mapFragment.arguments = intent.extras
+
+        supportFragmentManager.beginTransaction().replace(R.id.mapFragment, mapFragment).commit()
+        //startActivity(Intent(this, MapFragment::class.java))
+    }
+
+
     private fun setListeners(){
         buttonDate.setOnClickListener(this)
         buttonSave.setOnClickListener(this)
+        buttonMap.setOnClickListener(this)
     }
 
     private fun loadDataFromActivity(){

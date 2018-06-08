@@ -26,10 +26,13 @@
     <string name="tarefa_removida_sucesso">Tarefa removida com sucesso</string>
     <string name="adicionar_tarefa">Adicionar tarefa</string>
     <string name="atualizar_tarefa">Update Task</string>
-    
+
     <string name="API_KEY">AIzaSyDRRe1IphONolYrGysbBUmoJ7SOcnVITUI</string>
 
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="Mapa">Microsoft's MAP Location</string>
+    <string name="MinhaSubcricao">Subscricao propria</string>
+    <string name="clique_para_seleciona_a_data">Clique para seleciona a data</string>
 </resources>

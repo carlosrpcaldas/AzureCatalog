@@ -5,11 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- See Informations on Network -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Mapas V2 depende da OpenGL ES V2 -->
+    <!-- Maps V2 depends on OpenGL ES V2 -->
     <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
 
-    <!-- GPS por hardware -->
+    <!-- GPS via hardware -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Get localization via Wi-Fi or triangulation of antennas -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"

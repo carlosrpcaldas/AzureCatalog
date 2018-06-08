@@ -38,7 +38,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     private lateinit var mRecyclerTaskList: RecyclerView
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mSecurityPreferences: SecurityPreferences
-    private lateinit var mListerner: OnTaskListFragmentInteractionListener
+    private lateinit var mListener: OnTaskListFragmentInteractionListener
     private var mTaskFilter: Int = 0
 
     companion object {
@@ -72,7 +72,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         //Inicializa variaveis
         mTaskBusiness = TaskBusiness(mContext)
         mSecurityPreferences = SecurityPreferences(mContext)
-        mListerner = object : OnTaskListFragmentInteractionListener {
+        mListener = object : OnTaskListFragmentInteractionListener {
 
             override fun onListClick(taskId: Int) {
                 val bundle: Bundle = Bundle()
@@ -83,11 +83,13 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
                 startActivity(intent)
             }
+
             override fun onDeleteClick(taskId: Int) {
                 mTaskBusiness.delete(taskId)
                 loadTasks()
                 Toast.makeText(mContext, getString(R.string.tarefa_removida_sucesso), Toast.LENGTH_LONG).show()
             }
+
             override fun onUncompleteClick(taskID: Int) {
                 mTaskBusiness.complete(taskID, false)
                 loadTasks()
@@ -104,7 +106,7 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mRecyclerTaskList = rootView.findViewById(R.id.recyclerTaskList)
 
         // 2 Definir um layout com os itens de listagem
-        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf(), mListerner)
+        mRecyclerTaskList.adapter = TaskListAdapter(mutableListOf(), mListener)
 
         // 3 Definir um layout
         mRecyclerTaskList.layoutManager = LinearLayoutManager(mContext)
@@ -118,14 +120,14 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        when (view.id){
+        when (view.id) {
             R.id.floatAddTask -> {
                 startActivity(Intent(mContext, TaskFormActivity::class.java))
             }
         }
-     }
+    }
 
-    private fun loadTasks(){
-        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter), mListerner)
+    private fun loadTasks() {
+        mRecyclerTaskList.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter), mListener)
     }
 }

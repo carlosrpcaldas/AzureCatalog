@@ -9,7 +9,7 @@ import carloscaldas.fiap.com.br.azurecatalog.R
 class SplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
-    private val SPLASH_DELAY: Long = 4000 //4 seconds
+    private val SPLASH_DELAY: Long = 2000 //2 seconds
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
