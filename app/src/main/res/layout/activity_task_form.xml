@@ -14,13 +14,22 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <EditText
+        android:id="@+id/editSubscriptionId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Id da Subscricao"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editDescription" />
+
     <Spinner
         android:id="@+id/spinnerPriority"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editDescription" />
+        app:layout_constraintTop_toBottomOf="@id/editSubscriptionId" />
 
     <CheckBox
         android:id="@+id/checkComplete"

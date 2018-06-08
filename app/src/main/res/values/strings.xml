@@ -6,10 +6,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="nome">Name</string>
+    <string name="nome">Nome</string>
     <string name="email">E-mail</string>
-    <string name="password">Password</string>
-    <string name="register">ADD</string>
+    <string name="password">Senha</string>
+    <string name="register">Adicionar</string>
     <string name="informe_todos_campos">Informe todos os campos</string>
     <string name="email_em_uso">Email já esta em uso!</string>
     <string name="erro_inesperado">Algo de errado aconteceu! Tente novamente!</string>
@@ -17,22 +17,22 @@
     <string name="usuario_senha_incorretos">Usuario e/ou senha incorretos!</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="descricao">Description</string>
-    <string name="done">Done</string>
-    <string name="todo">Pending</string>
-    <string name="Sair">Logout</string>
-    <string name="tarefa_incluida">Tarefa incluida com sucesso</string>
-    <string name="tarefa_alterada">Tarefa alterada com sucesso</string>
-    <string name="tarefa_removida_sucesso">Tarefa removida com sucesso</string>
-    <string name="adicionar_tarefa">Adicionar tarefa</string>
-    <string name="atualizar_tarefa">Update Task</string>
+    <string name="descricao">Proposito da Subcricao</string>
+    <string name="done">Propria</string>
+    <string name="todo">Terceiros</string>
+    <string name="Sair">Sair</string>
+    <string name="tarefa_incluida">Subscricao incluida com sucesso</string>
+    <string name="tarefa_alterada">Subscricao alterada com sucesso</string>
+    <string name="tarefa_removida_sucesso">Subscricao removida com sucesso</string>
+    <string name="adicionar_tarefa">Adicionar subscricao</string>
+    <string name="atualizar_tarefa">Atualizar Subscricao</string>
 
     <string name="API_KEY">AIzaSyDRRe1IphONolYrGysbBUmoJ7SOcnVITUI</string>
 
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="Mapa">Microsoft's MAP Location</string>
+    <string name="Mapa">Microsoft no Mapa</string>
     <string name="MinhaSubcricao">Subscricao propria</string>
     <string name="clique_para_seleciona_a_data">Clique para seleciona a data</string>
 </resources>

@@ -31,6 +31,8 @@ class DataBaseConstants {
             val DESCRIPTION = "description"
             val COMPLETE = "complete"
             val DUEDATE = "duedate"
+            val SUBSCRIPTIONID = "subscriptionid"
+            val RESOURCEID = "resourceid"
         }
     }
 

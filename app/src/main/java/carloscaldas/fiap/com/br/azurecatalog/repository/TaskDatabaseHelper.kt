@@ -9,7 +9,7 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
 
     companion object {
         private val DATABASE_VERSION: Int = 1
-        private val DATABASE_NAME: String = "taks.db"
+        private val DATABASE_NAME: String = "azurecatalog.db"
     }
     // SQLite
     // INTEGER, REAL, TEXT, BLOB
@@ -33,7 +33,9 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
         ${DataBaseConstants.TASK.COLUMNS.PRIORITYID} INTEGER,
         ${DataBaseConstants.TASK.COLUMNS.DESCRIPTION} TEXT,
         ${DataBaseConstants.TASK.COLUMNS.COMPLETE} INTEGER,
-        ${DataBaseConstants.TASK.COLUMNS.DUEDATE} TEXT
+        ${DataBaseConstants.TASK.COLUMNS.DUEDATE} TEXT,
+        ${DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID} TEXT,
+        ${DataBaseConstants.TASK.COLUMNS.RESOURCEID} TEXT
         );"""
 
 
@@ -45,7 +47,7 @@ class TaskDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');" +
             "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
 */
-    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Baixa');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Média');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Alta');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Crítica');")
+    private val insertPriority = arrayOf("INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (1, 'Desenvolvimento');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (2, 'Homologação');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (3, 'Pre-Produção');", "INSERT INTO ${DataBaseConstants.PRIORITY.TABLE_NAME} values (4, 'Produção');")
 
     private val deleteTableUser = "drop table if exists ${DataBaseConstants.USER.TABLE_NAME}"
     private val deleteTablePriority = "drop table if exists ${DataBaseConstants.PRIORITY.TABLE_NAME}"

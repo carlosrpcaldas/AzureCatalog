@@ -4,6 +4,8 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import carloscaldas.fiap.com.br.azurecatalog.R
 
 class SplashActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        loadAnim()
         //Initialize the Handler
         mDelayHandler = Handler()
 
@@ -24,6 +27,22 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
+    fun loadAnim(){
+
+        val anim = AnimationUtils.loadAnimation(this,
+
+                R.anim.animacao_splash)
+        anim.reset()
+
+        //Pegando o nosso objeto criado no layout
+        val iv = findViewById<ImageView>(R.id.splash)
+        if (iv != null) {
+            iv.clearAnimation()
+            iv.startAnimation(anim)
+        }
+
+
+    }
 
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {

@@ -26,6 +26,7 @@
         tools:textColor="@android:color/holo_blue_dark" />
 
     <ImageView
+        android:id="@+id/splash"
         android:layout_width="329dp"
         android:layout_height="225dp"
         android:layout_marginBottom="8dp"

@@ -7,12 +7,10 @@ data class TaskEntity ( val id: Int,
                         val priorityID: Int,
                         var description: String,
                         var dueDate: String,
-                        var complete: Boolean)
-                        var latitude: String = ""
-                            get() = if (field.trim().isEmpty()) "0.0" else field
+                        var complete: Boolean,
+                        var subscriptionID: String,
+                        var resourceID: String)
 
-                        var longitude = ""
-                            get() = if (field.trim().isEmpty()) "0.0" else field
 
 
 

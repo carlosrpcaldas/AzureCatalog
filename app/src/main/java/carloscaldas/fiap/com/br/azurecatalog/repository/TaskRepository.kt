@@ -43,8 +43,10 @@ class TaskRepository(context: Context) {
                     val description = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.DESCRIPTION))
                     val dueDate = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.DUEDATE))
                     val complete = (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
+                    val subscriptionId = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID))
+                    val resourceId = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.RESOURCEID))
 
-                    list.add(TaskEntity(id, userID, priorityId, description, dueDate, complete))
+                    list.add(TaskEntity(id, userID, priorityId, description, dueDate, complete, subscriptionId, resourceId))
                 }
             }
 
@@ -67,7 +69,7 @@ class TaskRepository(context: Context) {
 
             val db = mTaskDatabaseHelper.readableDatabase
 
-            val projection = arrayOf(DataBaseConstants.TASK.COLUMNS.ID, DataBaseConstants.TASK.COLUMNS.USERID, DataBaseConstants.TASK.COLUMNS.PRIORITYID, DataBaseConstants.TASK.COLUMNS.DESCRIPTION, DataBaseConstants.TASK.COLUMNS.DUEDATE, DataBaseConstants.TASK.COLUMNS.COMPLETE)
+            val projection = arrayOf(DataBaseConstants.TASK.COLUMNS.ID, DataBaseConstants.TASK.COLUMNS.USERID, DataBaseConstants.TASK.COLUMNS.PRIORITYID, DataBaseConstants.TASK.COLUMNS.DESCRIPTION, DataBaseConstants.TASK.COLUMNS.DUEDATE, DataBaseConstants.TASK.COLUMNS.COMPLETE, DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID, DataBaseConstants.TASK.COLUMNS.RESOURCEID)
 
             val selection = "${DataBaseConstants.TASK.COLUMNS.ID} = ?"
             val selectionArgs = arrayOf(id.toString())
@@ -82,9 +84,11 @@ class TaskRepository(context: Context) {
                 val description = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.DESCRIPTION))
                 val dueDate = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.DUEDATE))
                 val complete = (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.COMPLETE)) == 1)
+                val subscriptionId = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID))
+                val resourceId = cursor.getString(cursor.getColumnIndex(DataBaseConstants.TASK.COLUMNS.RESOURCEID))
 
                 // Preencho a entidade de usuario
-                taskEntity = TaskEntity(id, userId, priorityId, description, dueDate, complete)
+                taskEntity = TaskEntity(id, userId, priorityId, description, dueDate, complete, subscriptionId, resourceId)
 
             }
 
@@ -117,6 +121,8 @@ class TaskRepository(context: Context) {
             insertValues.put(DataBaseConstants.TASK.COLUMNS.DESCRIPTION, task.description)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.DUEDATE, task.dueDate)
             insertValues.put(DataBaseConstants.TASK.COLUMNS.COMPLETE, complete)
+            insertValues.put(DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID, task.subscriptionID)
+            insertValues.put(DataBaseConstants.TASK.COLUMNS.RESOURCEID, task.resourceID)
 
             db.insert(DataBaseConstants.TASK.TABLE_NAME, null, insertValues).toInt()
 
@@ -138,6 +144,9 @@ class TaskRepository(context: Context) {
             updateValues.put(DataBaseConstants.TASK.COLUMNS.DESCRIPTION, task.description)
             updateValues.put(DataBaseConstants.TASK.COLUMNS.DUEDATE, task.dueDate)
             updateValues.put(DataBaseConstants.TASK.COLUMNS.COMPLETE, complete)
+            updateValues.put(DataBaseConstants.TASK.COLUMNS.SUBSCRIPTIONID, task.subscriptionID)
+            updateValues.put(DataBaseConstants.TASK.COLUMNS.RESOURCEID, task.resourceID)
+
 
             val selection = "${DataBaseConstants.TASK.COLUMNS.ID} = ?"
             val selectionArgs = arrayOf(task.id.toString())

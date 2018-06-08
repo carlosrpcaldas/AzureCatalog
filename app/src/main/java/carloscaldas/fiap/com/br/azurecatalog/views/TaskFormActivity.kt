@@ -11,6 +11,7 @@ import android.widget.Toast
 import carloscaldas.fiap.com.br.azurecatalog.R
 import carloscaldas.fiap.com.br.azurecatalog.business.PriorityBusiness
 import carloscaldas.fiap.com.br.azurecatalog.business.TaskBusiness
+import carloscaldas.fiap.com.br.azurecatalog.contants.DataBaseConstants
 import carloscaldas.fiap.com.br.azurecatalog.contants.TaskConstants
 import carloscaldas.fiap.com.br.azurecatalog.entities.PriorityEntity
 import carloscaldas.fiap.com.br.azurecatalog.entities.TaskEntity
@@ -72,6 +73,8 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         val mapFragment = MapFragment()
         //mapFragment.arguments = intent.extras
 
+        buttonMap.visibility = View.GONE
+
         supportFragmentManager.beginTransaction().replace(R.id.mapFragment, mapFragment).commit()
         //startActivity(Intent(this, MapFragment::class.java))
     }
@@ -90,6 +93,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val task = mTaskBusiness.get(mTaskId)
             if (task != null) {
                 editDescription.setText(task.description)
+                editSubscriptionId.setText(task.subscriptionID)
                 buttonDate.text = task.dueDate
                 checkComplete.isChecked = task.complete
                 spinnerPriority.setSelection(getIndex(task.priorityID))
@@ -108,8 +112,11 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val dueDate = buttonDate.text.toString()
             val description = editDescription.text.toString()
             val userID =  mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_ID).toInt()
+            val subscriptionId = editSubscriptionId.text.toString()
+            val resourceId = "000000XXXXX"
 
-            val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete )
+
+            val taskEntity = TaskEntity(mTaskId, userID, priorityId, description, dueDate, complete, subscriptionId, resourceId )
 
             if (mTaskId == 0) {
                 mTaskBusiness.insert(taskEntity)
