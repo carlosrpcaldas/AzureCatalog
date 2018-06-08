@@ -6,33 +6,35 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="nome">Nome</string>
+    <string name="nome">Name</string>
     <string name="email">E-mail</string>
-    <string name="password">Senha</string>
-    <string name="register">Adicionar</string>
-    <string name="informe_todos_campos">Informe todos os campos</string>
-    <string name="email_em_uso">Email já esta em uso!</string>
-    <string name="erro_inesperado">Algo de errado aconteceu! Tente novamente!</string>
+    <string name="password">Password</string>
+    <string name="register">Add</string>
+    <string name="informe_todos_campos">Fill al fields</string>
+    <string name="email_em_uso">Email is already been used!</string>
+    <string name="erro_inesperado">Something! Try again!</string>
     <string name="entrar">Login</string>
-    <string name="usuario_senha_incorretos">Usuario e/ou senha incorretos!</string>
+    <string name="usuario_senha_incorretos">User and/or password wrong!</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="descricao">Proposito da Subcricao</string>
-    <string name="done">Propria</string>
-    <string name="todo">Terceiros</string>
-    <string name="Sair">Sair</string>
-    <string name="tarefa_incluida">Subscricao incluida com sucesso</string>
-    <string name="tarefa_alterada">Subscricao alterada com sucesso</string>
-    <string name="tarefa_removida_sucesso">Subscricao removida com sucesso</string>
-    <string name="adicionar_tarefa">Adicionar subscricao</string>
-    <string name="atualizar_tarefa">Atualizar Subscricao</string>
+    <string name="descricao">Purpose of this subscription</string>
+    <string name="done">My own</string>
+    <string name="todo">Thir party</string>
+    <string name="Sair">Exit</string>
+    <string name="tarefa_incluida">Subscription successfully inserted</string>
+    <string name="tarefa_alterada">Subscription successfully updated</string>
+    <string name="tarefa_removida_sucesso">Subscription successfully deleted</string>
+    <string name="adicionar_tarefa">Add subscriptioin</string>
+    <string name="atualizar_tarefa">Update subscription</string>
 
     <string name="API_KEY">AIzaSyDRRe1IphONolYrGysbBUmoJ7SOcnVITUI</string>
 
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="Mapa">Microsoft no Mapa</string>
-    <string name="MinhaSubcricao">Subscricao propria</string>
-    <string name="clique_para_seleciona_a_data">Clique para seleciona a data</string>
+    <string name="Mapa">Microsoft on Map</string>
+    <string name="MinhaSubcricao">Own subscription</string>
+    <string name="clique_para_seleciona_a_data">Click to select a date</string>
+    <string name="Version">Version 1.0</string>
+    <string name="about">About</string>
 </resources>

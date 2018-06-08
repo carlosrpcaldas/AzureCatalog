@@ -27,7 +27,6 @@ import java.util.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
-
     private lateinit var mSecurityPreferences: SecurityPreferences
     private lateinit var mPriorityBusiness: PriorityBusiness
 
@@ -59,8 +58,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         formateDate()
 
 
-
-
         var mCallMyHttp = CallMyHttp()  //("https://api.github.com/users/Evin1-/repos")
         mCallMyHttp.executeReq("https://api.github.com/users/Evin1-/repos")
 //        mCallMyHttp.executeReq("http://viacep.com.br")
@@ -68,12 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
-
-
-
-
-    override fun onStart(){
+    override fun onStart() {
         super.onStart()
     }
 
@@ -110,6 +102,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.nav_done -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.COMPLETE)
             R.id.nav_todo -> fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.TODO)
+            R.id.nav_sobre -> {
+                about()
+                return true
+            }
             R.id.nav_logout -> {
                 handleLogout()
                 return false
@@ -124,12 +120,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    fun about() {
+        try {
+            startActivity(Intent(this, AboutActivity::class.java))
+            finish()
+        } catch (e: Exception) {
+            println("--------********************************--------------->${e.message}")
+        }
+    }
+
     private fun startDefaultFragment() {
         val fragment: android.support.v4.app.Fragment = TaskListFragment.newInstance(TaskConstants.TASKFILTER.COMPLETE)
         supportFragmentManager.beginTransaction().replace(R.id.frameContent, fragment).commit()
     }
 
-    private fun loadPriorityCache(){
+    private fun loadPriorityCache() {
         PriorityCacheConstants.setCache(mPriorityBusiness.getList())
     }
 
@@ -144,7 +149,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         finish()
     }
 
-    private fun formateDate(){
+    private fun formateDate() {
         val c = Calendar.getInstance()
 
         val days = arrayOf("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sabado")
@@ -154,8 +159,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         textDateDescription.text = str
     }
 
-    private fun formatUserName(){
-        val str = "Ola, ${mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)}!"
+    private fun formatUserName() {
+        val str = "Hello, ${mSecurityPreferences.getStoredString(TaskConstants.KEY.USER_NAME)}!"
         textHello.text = str
 
         val navigationView = findViewById(R.id.nav_view) as NavigationView

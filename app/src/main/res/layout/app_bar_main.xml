@@ -22,7 +22,7 @@
             android:id="@+id/textHello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ola, usuario!"
+            android:text="Hello, user!"
             android:paddingLeft="80dp"
             android:textSize="20sp"/>
 
